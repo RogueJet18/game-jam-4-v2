@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bseca5q1oj4di" path="res://player/art/Untitled2275_20260304114627.png" id="1_apn28"]
 [ext_resource type="Script" uid="uid://bxpd2y441e6wr" path="res://player/scripts/player.gd" id="1_t0cpu"]
+[ext_resource type="Script" uid="uid://bhyng6lvjur0s" path="res://player/scripts/animator.gd" id="3_8h4do"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0cpu"]
 
@@ -60,14 +61,19 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="Node2D" type="CharacterBody2D" unique_id=608666994]
+[node name="Player" type="CharacterBody2D" unique_id=608666994]
 script = ExtResource("1_t0cpu")
+speed = 5.0
+jump_speed = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=876436101]
+zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1095699694]
 shape = SubResource("CapsuleShape2D_t0cpu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1036150089]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1036150089 node_paths=PackedStringArray("player")]
 sprite_frames = SubResource("SpriteFrames_kaefl")
 animation = &"walk side"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=876436101]
+script = ExtResource("3_8h4do")
+player = NodePath("..")
