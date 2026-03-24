@@ -75,6 +75,11 @@ sources/3 = SubResource("TileSetAtlasSource_7kg71")
 sources/4 = SubResource("TileSetAtlasSource_pn05b")
 sources/5 = SubResource("TileSetAtlasSource_j7n0d")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uucye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uucye"]
+radius = 10.049875
+
 [node name="Level1" type="Node2D" unique_id=1174794541]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=992338703]
@@ -93,7 +98,12 @@ tile_set = SubResource("TileSet_0khkt")
 [node name="Player" parent="." unique_id=608666994 instance=ExtResource("8_0liqm")]
 position = Vector2(26, 140)
 
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=843317551]
+[node name="Area2D" type="Area2D" parent="Player" unique_id=1467689778]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1410658581]
+shape = SubResource("CapsuleShape2D_uucye")
+
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=843317551 groups=["enemies"]]
 script = ExtResource("9_uucye")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=2107395235]
@@ -103,3 +113,9 @@ texture = ExtResource("10_5jh6a")
 [node name="RayCast2D" type="RayCast2D" parent="Enemy" unique_id=890284650]
 position = Vector2(115, 150)
 target_position = Vector2(-18, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=8733542]
+position = Vector2(114, 145)
+shape = SubResource("CircleShape2D_uucye")
+
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
