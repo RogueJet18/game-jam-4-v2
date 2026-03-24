@@ -78,7 +78,10 @@ sources/5 = SubResource("TileSetAtlasSource_j7n0d")
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uucye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uucye"]
-radius = 10.049875
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uucye"]
+size = Vector2(4096, 32)
 
 [node name="Level1" type="Node2D" unique_id=1174794541]
 
@@ -103,6 +106,17 @@ position = Vector2(26, 140)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1410658581]
 shape = SubResource("CapsuleShape2D_uucye")
 
+[node name="can_take_damage" type="Timer" parent="Player" unique_id=404838960]
+one_shot = true
+
+[node name="health_display" type="Label" parent="Player" unique_id=1137508637]
+offset_left = -20.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = -13.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=843317551 groups=["enemies"]]
 script = ExtResource("9_uucye")
 
@@ -118,4 +132,13 @@ target_position = Vector2(-18, 10)
 position = Vector2(114, 145)
 shape = SubResource("CircleShape2D_uucye")
 
+[node name="water_hitbox" type="Area2D" parent="." unique_id=2094527038]
+position = Vector2(11, 1008)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water_hitbox" unique_id=1841841979 groups=["enemies"]]
+position = Vector2(2037, 0)
+shape = SubResource("RectangleShape2D_uucye")
+
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Player/can_take_damage" to="Player" method="_on_can_take_damage_timeout"]
+[connection signal="body_entered" from="water_hitbox" to="Player" method="_on_water_hitbox_body_entered"]
