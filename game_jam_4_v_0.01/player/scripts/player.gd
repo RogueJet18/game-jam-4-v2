@@ -43,6 +43,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				$health_display.text = "Death"
 				can_take_damage = false
 				## should we lock player movement here since they're dead?
+				## also change the animation
 
 func _on_can_take_damage_timeout() -> void: # damage taking cooldown 
 	can_take_damage = true
