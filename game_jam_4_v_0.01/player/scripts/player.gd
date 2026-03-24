@@ -32,4 +32,4 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
 		health -= 1
-		print("Ouch! Health now:", health)
+		print("Health now:", health)
