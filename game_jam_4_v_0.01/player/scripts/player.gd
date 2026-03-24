@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 ##the jump needs fine tuning somehow
 @export var speed = 30.0
 @export var jump_speed = 25.0
+@export var health = 5
 
 var acceleration = 30.0
 var jump_acceleration = -25.0
@@ -27,3 +28,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed * acceleration)
 	
 	move_and_slide()
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		health -= 1
+		print("Ouch! Health now:", health)
