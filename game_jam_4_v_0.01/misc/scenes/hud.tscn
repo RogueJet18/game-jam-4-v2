@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://d2sctytu20wck"]
+
+[ext_resource type="Texture2D" uid="uid://clxhlu8gonai7" path="res://misc/art/Untitled_03-04-2026_12-46-44.png" id="1_5e8iq"]
+[ext_resource type="Texture2D" uid="uid://chsm3kmixjpvg" path="res://misc/art/Untitled_03-04-2026_12-46-44_13.png" id="2_4hjkb"]
+[ext_resource type="Texture2D" uid="uid://c2axke34jclyb" path="res://misc/art/IMG_6211.png" id="3_3yhqw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yat3b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 11
+border_width_top = 11
+border_width_right = 11
+border_width_bottom = 11
+border_color = Color(0.23529412, 0.6392157, 0.4392157, 1)
+
+[sub_resource type="Theme" id="Theme_d80le"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_smtpa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b38ld"]
+
+[node name="HUD" type="Control" unique_id=1749138244]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="border" type="PanelContainer" parent="." unique_id=1200074783]
+layout_mode = 0
+offset_right = 1156.0
+offset_bottom = 649.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yat3b")
+metadata/_edit_lock_ = true
+
+[node name="health_bar" type="PanelContainer" parent="." unique_id=1134279057]
+texture_filter = 1
+layout_direction = 2
+layout_mode = 1
+offset_left = 22.0
+offset_top = 514.0
+offset_right = 212.0
+offset_bottom = 636.0
+theme = SubResource("Theme_d80le")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_smtpa")
+
+[node name="TextureRect" type="TextureRect" parent="health_bar" unique_id=1298949324]
+layout_mode = 2
+size_flags_vertical = 13
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_5e8iq")
+
+[node name="stamina_bar" type="PanelContainer" parent="." unique_id=269492071]
+texture_filter = 1
+layout_mode = 0
+offset_left = 24.0
+offset_top = 473.0
+offset_right = 211.0
+offset_bottom = 599.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b38ld")
+
+[node name="TextureRect" type="TextureRect" parent="stamina_bar" unique_id=1165213330]
+layout_mode = 2
+texture = ExtResource("2_4hjkb")
+
+[node name="inventory" type="PanelContainer" parent="." unique_id=1323250684]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 589.0
+offset_right = 559.0
+offset_bottom = 629.0
+
+[node name="TextureRect" type="TextureRect" parent="inventory" unique_id=1074207722]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_3yhqw")
+stretch_mode = 3
