@@ -119,15 +119,15 @@ vertical_alignment = 1
 [node name="Enemy" parent="." unique_id=816531750 instance=ExtResource("9_8cxc8")]
 position = Vector2(109, 143)
 
+[node name="Enemy2" parent="." unique_id=1574486855 instance=ExtResource("9_8cxc8")]
+position = Vector2(288, 143)
+
 [node name="water_hitbox" type="Area2D" parent="." unique_id=2094527038]
 position = Vector2(11, 1008)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="water_hitbox" unique_id=1841841979 groups=["enemies"]]
 position = Vector2(2037, 0)
 shape = SubResource("RectangleShape2D_uucye")
-
-[node name="Enemy2" parent="." unique_id=1574486855 instance=ExtResource("9_8cxc8")]
-position = Vector2(288, 143)
 
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Player/can_take_damage" to="Player" method="_on_can_take_damage_timeout"]

@@ -49,7 +49,7 @@ func _on_can_take_damage_timeout() -> void: # damage taking cooldown
 	can_take_damage = true
 	# cooldown is currently 1 second
 
-func _on_water_hitbox_body_entered(body: Node2D) -> void:
+func _on_water_hitbox_body_entered(_body: Node2D) -> void:
 	health = 0
 	$health_display.text = "Death"
 	# die when you fall off the platform and hit the water at the bottom
