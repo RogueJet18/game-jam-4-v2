@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://caebjqbs3s76f"]
 
 [ext_resource type="Texture2D" uid="uid://4jh25l15vkjw" path="res://levels/art/lvl1_bg.png" id="1_ocqfn"]
+[ext_resource type="Script" uid="uid://c64q70y7oxhga" path="res://levels/scenes/level_1.gd" id="1_uucye"]
 [ext_resource type="Texture2D" uid="uid://dtxn47e8adadc" path="res://levels/art/GrateCover GJ.png" id="2_0liqm"]
 [ext_resource type="Texture2D" uid="uid://b8uwt4tjp51ii" path="res://levels/art/GJ lvl 1 platform Pipe1 32x32.png" id="3_8cxc8"]
 [ext_resource type="Texture2D" uid="uid://c3fjj3aiklv57" path="res://levels/art/GJ Lv1 platform Pipe2 32x32.png" id="4_uucye"]
@@ -8,8 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b0q0up5nujtwa" path="res://levels/art/Crate GJ.png" id="6_0xbok"]
 [ext_resource type="Texture2D" uid="uid://dx2ar3gsmxqlf" path="res://levels/art/broken grate GJ .png" id="7_nwk3w"]
 [ext_resource type="PackedScene" uid="uid://c7xeqiy884fuu" path="res://player/scenes/player.tscn" id="8_0liqm"]
-[ext_resource type="Script" uid="uid://4ax6fq15rj8u" path="res://levels/scenes/enemy.gd" id="9_uucye"]
-[ext_resource type="Texture2D" uid="uid://dhmvejbqwuxwj" path="res://levels/art/enemy2.png" id="10_5jh6a"]
+[ext_resource type="PackedScene" uid="uid://610h8dypmqec" path="res://levels/scenes/enemy.tscn" id="9_8cxc8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lcg1t"]
 texture = ExtResource("2_0liqm")
@@ -77,10 +77,12 @@ sources/5 = SubResource("TileSetAtlasSource_j7n0d")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uucye"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uucye"]
-radius = 10.049875
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uucye"]
+size = Vector2(4096, 32)
 
 [node name="Level1" type="Node2D" unique_id=1174794541]
+script = ExtResource("1_uucye")
+next_level_path = "res://levels/scenes/level_2.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=992338703]
 offset_right = 4096.0
@@ -103,9 +105,29 @@ position = Vector2(26, 140)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" unique_id=1410658581]
 shape = SubResource("CapsuleShape2D_uucye")
 
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=843317551 groups=["enemies"]]
-script = ExtResource("9_uucye")
+[node name="can_take_damage" type="Timer" parent="Player" unique_id=404838960]
+one_shot = true
 
+[node name="health_display" type="Label" parent="Player" unique_id=1137508637]
+offset_left = -20.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = -13.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy" parent="." unique_id=816531750 instance=ExtResource("9_8cxc8")]
+position = Vector2(109, 143)
+
+[node name="Enemy2" parent="." unique_id=1574486855 instance=ExtResource("9_8cxc8")]
+position = Vector2(288, 143)
+
+[node name="water_hitbox" type="Area2D" parent="." unique_id=2094527038]
+position = Vector2(11, 1008)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water_hitbox" unique_id=1841841979 groups=["enemies"]]
+position = Vector2(2037, 0)
+shape = SubResource("RectangleShape2D_uucye")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=8733542]
 position = Vector2(114, 145)
 shape = SubResource("CircleShape2D_uucye")
@@ -122,3 +144,5 @@ target_position = Vector2(-18, 10)
 collide_with_areas = true
 
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Player/can_take_damage" to="Player" method="_on_can_take_damage_timeout"]
+[connection signal="body_entered" from="water_hitbox" to="Player" method="_on_water_hitbox_body_entered"]

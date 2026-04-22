@@ -3,7 +3,9 @@ class_name Player extends CharacterBody2D
 ##the jump needs fine tuning somehow
 @export var speed = 30.0
 @export var jump_speed = 25.0
+
 @export var health = 5
+@export var can_take_damage := true
 
 var acceleration = 30.0
 var jump_acceleration = -25.0
@@ -31,5 +33,24 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
-		health -= 1
-		print("Ouch! Health now:", health)
+		if can_take_damage == true:
+			if health > 1:
+				health -= 1
+				can_take_damage = false
+				$health_display.text = "Health: %d/5" % health
+				$can_take_damage.start() # start cooldown timer (1 sec)
+			else:
+				$health_display.text = "Death"
+				can_take_damage = false
+				## should we lock player movement here since they're dead?
+				## also change the animation
+
+func _on_can_take_damage_timeout() -> void: # damage taking cooldown 
+	can_take_damage = true
+	# cooldown is currently 1 second
+
+func _on_water_hitbox_body_entered(_body: Node2D) -> void:
+	health = 0
+	$health_display.text = "Death"
+	# die when you fall off the platform and hit the water at the bottom
+	## how do you make it not fall through the water like that??

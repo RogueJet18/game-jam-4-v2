@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://610h8dypmqec"]
+
+[ext_resource type="Script" uid="uid://4ax6fq15rj8u" path="res://levels/scenes/enemy.gd" id="1_uhfxo"]
+[ext_resource type="Texture2D" uid="uid://dhmvejbqwuxwj" path="res://levels/art/enemy2.png" id="2_ji5b8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uucye"]
+radius = 11.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=816531750 groups=["enemies"]]
+script = ExtResource("1_uhfxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=86121127]
+texture = ExtResource("2_ji5b8")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=206843778]
+position = Vector2(0, 9)
+target_position = Vector2(-20, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=589966346]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_uucye")
